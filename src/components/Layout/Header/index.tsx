@@ -1,7 +1,12 @@
 import React, { FC } from 'react';
+import Logo from '@src/components/Logo';
 
 const Header: FC = () => {
-  return <header>header 입니다.</header>;
+  return (
+    <header>
+      <Logo />
+    </header>
+  );
 };
 
 export default Header;
