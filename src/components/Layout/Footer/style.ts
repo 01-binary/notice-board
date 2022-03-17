@@ -5,6 +5,6 @@ export const Wrapper = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid #f0f1f3;
+  box-shadow: rgb(0 0 0 / 45%) 0px -5px 20px -15px;
   color: #c5c5c5;
 `;
