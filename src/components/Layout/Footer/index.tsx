@@ -1,7 +1,14 @@
 import React, { FC } from 'react';
 
+import { FOOTER_MESSAGE } from '@src/assets/string';
+import * as S from './style';
+
 const Footer: FC = () => {
-  return <footer>Footer 입니다.</footer>;
+  return (
+    <S.Wrapper>
+      {FOOTER_MESSAGE}
+    </S.Wrapper>
+  );
 };
 
 export default Footer;

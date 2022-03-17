@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import Logo from '@src/components/Logo';
+import * as S from './style';
 
 const Header: FC = () => {
   return (
-    <header>
+    <S.Container>
       <Logo />
-    </header>
+    </S.Container>
   );
 };
 
