@@ -1,16 +1,14 @@
 import React, { FC } from 'react';
-import Button from '@src/components/Button';
+import Button from '@src/components/common/Button';
 
 import * as S from './style';
+import { ADD_BOARD } from '@src/assets/string';
 
 const Tool: FC = () => {
   return (
     <S.Container>
       <Button size={'medium'}>
-        asd
-      </Button>
-      <Button size={'medium'}>
-        asd
+        {ADD_BOARD}
       </Button>
     </S.Container>
   );

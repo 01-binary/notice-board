@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Logo from '@src/components/Logo';
+import Logo from '@src/components/common/Logo';
 import * as S from './style';
 
 const Header: FC = () => {

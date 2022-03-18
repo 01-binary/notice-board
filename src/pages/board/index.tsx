@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
-import Section from '@src/components/Layout/Section';
+import Section from '@src/components/common/Layout/Section';
 
-import Tool from '@src/components/Tool';
+import Table from '@src/components/common/Table';
+import Tool from '@src/components/board/Tool';
+
 import * as S from './style';
 
 const BoardPage: FC = () => {
@@ -9,7 +11,7 @@ const BoardPage: FC = () => {
     <Section>
       <S.Container>
         <Tool />
-        <div>table</div>
+        <Table />
       </S.Container>
     </Section>
   );

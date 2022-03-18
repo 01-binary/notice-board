@@ -4,5 +4,5 @@ export const Container = styled.header`
   height: 10%;
   display: flex;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 28px;
 `;

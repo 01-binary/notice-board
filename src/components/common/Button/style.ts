@@ -40,6 +40,7 @@ export const Button = styled.button<Props>`
   font-weight: bold;
   padding-left: 1rem;
   padding-right: 1rem;
+  background-color: aliceblue;
   cursor: pointer;
   ${sizeStyles}
 `;
