@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import Table from '@src/components/common/Table';
 
@@ -30,7 +30,7 @@ const mock: BoardList[] = [
 
 const Content: FC = () => {
   const { showModal, CustomModal } = useModal(true);
-
+  const [selectedRow, SetSelectedRow] = useState<number | null>(null);
   return (
     <>
       <Table
@@ -38,7 +38,13 @@ const Content: FC = () => {
         columns={boardColumn}
         onClick={(event) => {
           console.log(event.currentTarget.rowIndex);
-          showModal();
+          if (
+            typeof event.currentTarget.rowIndex === 'number' &&
+            event.currentTarget.rowIndex !== 0
+          ) {
+            SetSelectedRow(event.currentTarget.rowIndex);
+            showModal();
+          }
         }}
       />
       <CustomModal>
