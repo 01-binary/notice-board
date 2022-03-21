@@ -5,9 +5,10 @@ import Table from '@src/components/common/Table';
 import Tool from '@src/components/board/Tool';
 
 import { boardColumn } from '@src/assets/columns';
+import type { BoardInput } from '@src/types/board';
 import * as S from './style';
 
-const mock = [
+const mock: BoardInput[] = [
   {
     id: 0,
     title: '테스트',

@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import * as S from './style';
 
 interface Column {
   title: string;
@@ -18,19 +19,27 @@ const Table: FC<Props> = ({ data, columns }) => {
           <tr>
             {columns.map((column) => {
               const { title, key } = column;
-              return <th key={key}>{title}</th>;
+              return <S.TH key={key}>{title}</S.TH>;
             })}
           </tr>
         </thead>
         <tbody>
-          {data.map((value: object, index: number) => {
+          {data.map((value: any, index: number) => {
             console.log(value);
+            const { id } = value;
             return (
-              <tr key={index}>
+              <S.HoverableTR
+                key={index}
+                onClick={() => {
+                  alert(id);
+                }}
+              >
                 {Object.values(value).map((content) => {
-                  return <td key={content}>{content}</td>
+                  return (
+                    <S.TD key={content as string}>{content as string}</S.TD>
+                  );
                 })}
-              </tr>
+              </S.HoverableTR>
             );
           })}
         </tbody>
