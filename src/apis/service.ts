@@ -1,6 +1,9 @@
 import { AxiosResponse } from 'axios';
 import Client from '@src/apis/client';
 
+import { now } from '@src/utils/day';
+import type { AddPostRequest } from '@src/interface/posts';
+
 const service = {
   async getPostList() {
     const res: AxiosResponse = await Client.instance.get(
@@ -17,9 +20,13 @@ const service = {
     return res;
   },
 
-  async addPost(addPostRequest: any) {
-
-  }
+  async addPost(addPostRequest: AddPostRequest) {
+    const res: AxiosResponse = await Client.instance.post(
+      `${Client.path.Api}/posts`,
+      { ...addPostRequest, createAt: now },
+    );
+    return res;
+  },
 };
 
 export default service;

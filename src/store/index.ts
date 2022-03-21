@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
+import { createLogger } from 'redux-logger';
 
 import rootReducer, { rootSaga } from '@src/store/modules';
 
@@ -9,7 +10,7 @@ const sagaMiddleware = createSagaMiddleware();
 const initStore = () => {
   const store = configureStore({
     reducer: rootReducer,
-    middleware: [sagaMiddleware],
+    middleware: [sagaMiddleware, createLogger()],
     devTools: true,
   });
 

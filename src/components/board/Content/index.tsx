@@ -2,14 +2,16 @@ import React, { FC, useState, useEffect } from 'react';
 
 import Table from '@src/components/common/Table';
 import Loading from '@src/components/common/Loading';
+import Modal from '@src/components/common/Modal';
 
-import { useModal, usePostsFetch } from '@src/hooks';
+import { useModalData, usePostsFetch } from '@src/hooks';
 
 import { postColumn } from '@src/assets/columns';
 import type { Post } from '@src/interface/posts';
 
 const Content: FC = () => {
-  const { showModal, CustomModal } = useModal(true);
+  const { isModalVisible, showModal, closeModal } = useModalData();
+
   // const [selectedRow, SetSelectedRow] = useState<number | null>(null);
   const { getPosts, postsLoading, posts } = usePostsFetch();
 
@@ -17,6 +19,7 @@ const Content: FC = () => {
     getPosts();
   }, []);
 
+  const selectedPostLoading = true;
   if (postsLoading) return <Loading />;
   return (
     <>
@@ -34,9 +37,9 @@ const Content: FC = () => {
           }
         }}
       />
-      <CustomModal>
-        <div>content</div>
-      </CustomModal>
+      <Modal visible={isModalVisible} closeModal={closeModal}>
+        {selectedPostLoading ? <Loading /> : <div>content</div>}
+      </Modal>
     </>
   );
 };

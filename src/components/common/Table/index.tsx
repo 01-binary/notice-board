@@ -26,7 +26,6 @@ const Table: FC<Props> = ({ data, columns, onClick }) => {
         </thead>
         <tbody>
           {data.map((value: any, index: number) => {
-            console.log(value);
             return (
               <S.HoverableTR key={index} onClick={onClick}>
                 {Object.values(value).map((content, innerIndex) => {

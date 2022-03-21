@@ -41,7 +41,7 @@ export const InnerContainer = styled.div`
 
   max-height: 500px;
   overflow-y: auto;
-  top: 30%;
+  top: 20%;
   margin: 0 auto;
   padding: 1rem;
   display: flex;

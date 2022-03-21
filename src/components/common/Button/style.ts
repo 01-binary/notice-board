@@ -36,11 +36,10 @@ export const Button = styled.button<Props>`
   justify-content: center;
   outline: none;
   border: none;
-  border-radius: 4px;
+  border-radius: 16px;
   font-weight: bold;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  background-color: aliceblue;
+  padding: 1rem;
+  background-color: #f0f1ff;
   cursor: pointer;
   &:hover {
     background-color: antiquewhite;
