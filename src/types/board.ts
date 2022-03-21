@@ -1,4 +1,4 @@
-export type BoardInput = {
+export type BoardList = {
   id: number;
   title: string;
   author: string;

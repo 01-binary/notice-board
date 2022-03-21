@@ -42,5 +42,8 @@ export const Button = styled.button<Props>`
   padding-right: 1rem;
   background-color: aliceblue;
   cursor: pointer;
+  &:hover {
+    background-color: antiquewhite;
+  }
   ${sizeStyles}
 `;

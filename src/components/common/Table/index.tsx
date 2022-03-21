@@ -9,9 +9,10 @@ interface Column {
 interface Props {
   data: object[];
   columns: Column[];
+  onClick?: (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => void;
 }
 
-const Table: FC<Props> = ({ data, columns }) => {
+const Table: FC<Props> = ({ data, columns, onClick }) => {
   return (
     <>
       <table>
@@ -26,17 +27,11 @@ const Table: FC<Props> = ({ data, columns }) => {
         <tbody>
           {data.map((value: any, index: number) => {
             console.log(value);
-            const { id } = value;
             return (
-              <S.HoverableTR
-                key={index}
-                onClick={() => {
-                  alert(id);
-                }}
-              >
-                {Object.values(value).map((content) => {
+              <S.HoverableTR key={index} onClick={onClick}>
+                {Object.values(value).map((content, innerIndex) => {
                   return (
-                    <S.TD key={content as string}>{content as string}</S.TD>
+                    <S.TD key={`${index}_${innerIndex}`}>{content as string}</S.TD>
                   );
                 })}
               </S.HoverableTR>
