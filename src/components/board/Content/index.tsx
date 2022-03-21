@@ -4,10 +4,10 @@ import Table from '@src/components/common/Table';
 
 import { useModal } from '@src/hooks';
 
-import { boardColumn } from '@src/assets/columns';
-import type { Board } from '@src/types/board';
+import { postColumn } from '@src/assets/columns';
+import type { Post } from '@src/interface/posts';
 
-const mock: Board[] = [
+const mock: Post[] = [
   {
     id: 1,
     title: '테스트',
@@ -38,7 +38,7 @@ const Content: FC = () => {
     <>
       <Table
         data={mock}
-        columns={boardColumn}
+        columns={postColumn}
         onClick={(event) => {
           console.log(event.currentTarget.rowIndex);
           if (

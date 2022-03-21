@@ -2,20 +2,24 @@ import { AxiosResponse } from 'axios';
 import Client from '@src/apis/client';
 
 const service = {
-  async getBoardList() {
+  async getPostList() {
     const res: AxiosResponse = await Client.instance.get(
-      `${Client.path.carApi}/boardList`,
+      `${Client.path.carApi}/posts`,
     );
     return res.data;
   },
 
-  async getBoardDetailInformation(boardId: number) {
-    if (!boardId) return {};
+  async getPostDetailInformation(postId: number) {
+    if (!postId) return {};
     const res: AxiosResponse = await Client.instance.get(
-      `${Client.path.carApi}/boardList/${boardId}`,
+      `${Client.path.carApi}/posts/${postId}`,
     );
     return res.data;
   },
+
+  async addPost(addPostRequest: any) {
+
+  }
 };
 
 export default service;

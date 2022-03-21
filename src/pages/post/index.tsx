@@ -6,7 +6,7 @@ import Content from '@src/components/board/Content';
 
 import * as S from './style';
 
-const BoardPage: FC = () => {
+const PostPage: FC = () => {
   return (
     <Section>
       <S.Container>
@@ -17,4 +17,4 @@ const BoardPage: FC = () => {
   );
 };
 
-export default BoardPage;
+export default PostPage;

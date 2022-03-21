@@ -3,7 +3,7 @@ import Button from '@src/components/common/Button';
 import { useModal } from '@src/hooks';
 
 import * as S from './style';
-import { ADD_BOARD } from '@src/assets/string';
+import { ADD_POST } from '@src/assets/string';
 
 const Tool: FC = () => {
   const { showModal, CustomModal } = useModal(false);
@@ -17,7 +17,7 @@ const Tool: FC = () => {
             showModal();
           }}
         >
-          {ADD_BOARD}
+          {ADD_POST}
         </Button>
       </S.Container>
       <CustomModal>

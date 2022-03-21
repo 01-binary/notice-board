@@ -1,4 +1,4 @@
-export const boardColumn = [
+export const postColumn = [
   {
     title: '번호',
     key: 'id',
