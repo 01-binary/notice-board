@@ -5,25 +5,28 @@ import Table from '@src/components/common/Table';
 import { useModal } from '@src/hooks';
 
 import { boardColumn } from '@src/assets/columns';
-import type { BoardList } from '@src/types/board';
+import type { Board } from '@src/types/board';
 
-const mock: BoardList[] = [
+const mock: Board[] = [
   {
     id: 1,
     title: '테스트',
     author: '이진수',
+    content: '테스트1',
     createdAt: '123',
   },
   {
     id: 2,
     title: '테스트1',
     author: '이진수1',
+    content: '테스트2',
     createdAt: '123',
   },
   {
     id: 3,
     title: '테스트2',
     author: '이진수2',
+    content: '테스트3',
     createdAt: '123',
   },
 ];
