@@ -4,17 +4,17 @@ import Client from '@src/apis/client';
 const service = {
   async getPostList() {
     const res: AxiosResponse = await Client.instance.get(
-      `${Client.path.carApi}/posts`,
+      `${Client.path.Api}/posts`,
     );
-    return res.data;
+    return res;
   },
 
   async getPostDetailInformation(postId: number) {
     if (!postId) return {};
     const res: AxiosResponse = await Client.instance.get(
-      `${Client.path.carApi}/posts/${postId}`,
+      `${Client.path.Api}/posts/${postId}`,
     );
-    return res.data;
+    return res;
   },
 
   async addPost(addPostRequest: any) {

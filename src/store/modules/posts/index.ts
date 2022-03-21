@@ -63,5 +63,19 @@ const selfSelector = (state: RootState) => state[POSTS];
 
 const postsSelector = createSelector(selfSelector, (state) => state.posts);
 
+export const PostsSelector = {
+  loading: createSelector(
+    postsSelector,
+    (posts) => posts.loading
+  ),
+  data: createSelector(
+    postsSelector,
+    (posts) => posts.data
+  ),
+  error: createSelector(
+    postsSelector,
+    (posts) => posts.error
+  ),
+}
 export const postsAction = postsSlice.actions;
 export const postsReducer = postsSlice.reducer;

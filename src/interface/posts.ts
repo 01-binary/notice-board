@@ -9,13 +9,13 @@ export interface Post {
 export interface PostReduxState {
   posts: {
     loading: boolean;
-    data: Post[] | [],
-    error: any,
-  },
+    data: Post[] | [];
+    error: any;
+  };
   selectedPost: {
     loading: boolean;
     id: number | null;
-    data: Post | {},
-    error: any,
-  }
+    data: Post | {};
+    error: any;
+  };
 }
