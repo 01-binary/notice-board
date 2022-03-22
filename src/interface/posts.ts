@@ -16,8 +16,7 @@ export interface PostReduxState {
   };
   selectedPost: {
     loading: boolean;
-    id: number | null;
-    data: Post | {};
+    data: Post | null;
     error: APIError | null;
   };
   addPost: {
@@ -26,7 +25,7 @@ export interface PostReduxState {
   };
 }
 
-export interface AddPostRequest {
+export type AddPostRequest = {
   title: string;
   author: string;
   content: string;

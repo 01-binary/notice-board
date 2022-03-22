@@ -4,14 +4,15 @@ import Button from '@src/components/common/Button';
 import Modal from '@src/components/common/Modal';
 import Loading from '@src/components/common/Loading';
 
-import { useModalData } from '@src/hooks';
+import { useAddPostFetch, useModalData } from '@src/hooks';
 
 import * as S from './style';
-import { ADD_POST } from '@src/assets/string';
+import { ADD_POST, TITLE, CONTENT, AUTHOR } from '@src/assets/string';
 import type { AddPostRequest, AddPostInput } from '@src/interface/posts';
 
 const Tool: FC = () => {
   const { isModalVisible, showModal, closeModal } = useModalData();
+  const { addPost, addPostLoading } = useAddPostFetch();
   const [formState, SetFormState] = useState<AddPostRequest>({
     title: '',
     author: '',
@@ -21,7 +22,7 @@ const Tool: FC = () => {
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      alert(`${formState.title}, ${formState.author}, ${formState.content}`);
+      addPost({ addPostRequest: { ...formState }, onSuccess: closeModal });
     },
     [formState],
   );
@@ -42,7 +43,6 @@ const Tool: FC = () => {
     }
   };
 
-  const loading = false;
   return (
     <>
       <S.Container>
@@ -56,49 +56,44 @@ const Tool: FC = () => {
         </Button>
       </S.Container>
       <Modal visible={isModalVisible} closeModal={closeModal}>
-        {loading ? (
+        {addPostLoading ? (
           <Loading />
         ) : (
           <>
-            <form onSubmit={handleSubmit}>
-              <div>
-                <label>
-                  제목:
-                  <input
-                    type="text"
-                    value={formState.title}
-                    onChange={handleChange('title')}
-                    required
-                  />
-                </label>
-              </div>
+            <S.Form onSubmit={handleSubmit}>
+              <S.FormRowContainer>
+                <S.Label>{TITLE}</S.Label>
+                <S.Input
+                  type="text"
+                  value={formState.title}
+                  onChange={handleChange('title')}
+                  required
+                />
+              </S.FormRowContainer>
 
-              <div>
-                <label>
-                  내용:
-                  <input
-                    type="text"
-                    value={formState.content}
-                    onChange={handleChange('content')}
-                    required
-                  />
-                </label>
-              </div>
+              <S.FormRowContainer>
+                <S.Label>{CONTENT}</S.Label>
+                <S.TextArea
+                  rows={1}
+                  value={formState.content}
+                  onChange={handleChange('content')}
+                  required
+                />
+              </S.FormRowContainer>
 
-              <div>
-                <label>
-                  작성자:
-                  <input
-                    type="text"
-                    value={formState.author}
-                    onChange={handleChange('author')}
-                    required
-                  />
-                </label>
-              </div>
-
-              <input type="submit" value={ADD_POST} />
-            </form>
+              <S.FormRowContainer>
+                <S.Label>{AUTHOR}</S.Label>
+                <S.Input
+                  type="text"
+                  value={formState.author}
+                  onChange={handleChange('author')}
+                  required
+                />
+              </S.FormRowContainer>
+              <S.SubmitContainer>
+                <S.SubmitInput type="submit" value={ADD_POST} />
+              </S.SubmitContainer>
+            </S.Form>
           </>
         )}
       </Modal>
