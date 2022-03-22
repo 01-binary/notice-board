@@ -1,9 +1,13 @@
 import React, { FC } from 'react';
 import * as S from './style';
 
-const Loading: FC = () => {
+interface Props {
+  height?: string;
+}
+
+const Loading: FC<Props> = ({height = '150px'}) => {
   return (
-    <S.Container>
+    <S.Container height={height}>
       <S.Spinner />
     </S.Container>
   );

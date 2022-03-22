@@ -27,3 +27,5 @@ export const CreatedAtWrapper = styled.div`
   justify-content: center;
   color: lightgray;
 `;
+
+export const IntersectionWrapper = styled.div``;

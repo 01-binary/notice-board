@@ -1,10 +1,15 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 
 import Table from '@src/components/common/Table';
 import Loading from '@src/components/common/Loading';
 import Modal from '@src/components/common/Modal';
 
-import { useModalData, usePostsFetch, useSelectedPostFetch } from '@src/hooks';
+import {
+  useIntersectionObserver,
+  useModalData,
+  usePostsFetch,
+  useSelectedPostFetch,
+} from '@src/hooks';
 
 import * as S from './style';
 import { TITLE, AUTHOR } from '@src/assets/string';
@@ -16,7 +21,15 @@ const Content: FC = () => {
   const { getSelectedPost, selectedPostLoading, selectedPost } =
     useSelectedPostFetch();
 
-  console.log(selectedPost);
+  const target = useRef<HTMLDivElement>(null);
+  useIntersectionObserver({
+    target,
+    onIntersect: ([{ isIntersecting }]) => {
+      if (isIntersecting) {
+        console.log('intersecting');
+      }
+    },
+  });
   useEffect(() => {
     getPosts();
   }, []);
@@ -37,6 +50,9 @@ const Content: FC = () => {
           }
         }}
       />
+      <div ref={target}>
+        <Loading height="100px" />
+      </div>
       <Modal visible={isModalVisible} closeModal={closeModal}>
         {selectedPostLoading ? (
           <Loading />

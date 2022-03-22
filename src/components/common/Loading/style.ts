@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 import Logo from '@src/components/common/Logo';
 
-export const Container = styled.div`
-  height: 150px;
+interface ContainerProps {
+  height: string;
+}
+export const Container = styled.div<ContainerProps>`
+  height: ${(props) => props.height};
   display: flex;
   justify-content: center;
   align-items: center;
