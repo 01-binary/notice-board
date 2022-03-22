@@ -12,6 +12,7 @@ const initialState: PostReduxState = {
   posts: {
     loading: false,
     data: [],
+    total: null,
     error: null,
   },
   selectedPost: {
@@ -36,9 +37,11 @@ const postsSlice = createSlice({
       })
       .addCase(
         `${postsAsyncAction.getPosts.success}`,
-        (state, action: PayloadAction<{ posts: Post[] }>) => {
+        (state, action: PayloadAction<{ posts: Post[]; total: number }>) => {
+          const { posts, total } = action.payload;
           state.posts.loading = false;
-          state.posts.data = action.payload.posts;
+          state.posts.data = posts;
+          state.posts.total = total;
         },
       )
       .addCase(
@@ -91,15 +94,28 @@ const postsSelector = createSelector(selfSelector, (state) => state.posts);
 export const PostsSelector = {
   loading: createSelector(postsSelector, (posts) => posts.loading),
   data: createSelector(postsSelector, (posts) => posts.data),
+  total: createSelector(postsSelector, (posts) => posts.total),
   error: createSelector(postsSelector, (posts) => posts.error),
 };
 
-const selectedPostSelector = createSelector(selfSelector, (state) => state.selectedPost);
+const selectedPostSelector = createSelector(
+  selfSelector,
+  (state) => state.selectedPost,
+);
 
 export const SelectedPostSelector = {
-  loading: createSelector(selectedPostSelector, (selectedPost) => selectedPost.loading),
-  data: createSelector(selectedPostSelector, (selectedPost) => selectedPost.data),
-  error: createSelector(selectedPostSelector, (selectedPost) => selectedPost.error),
+  loading: createSelector(
+    selectedPostSelector,
+    (selectedPost) => selectedPost.loading,
+  ),
+  data: createSelector(
+    selectedPostSelector,
+    (selectedPost) => selectedPost.data,
+  ),
+  error: createSelector(
+    selectedPostSelector,
+    (selectedPost) => selectedPost.error,
+  ),
 };
 
 const addPostSelector = createSelector(selfSelector, (state) => state.addPost);

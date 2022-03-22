@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const Form = styled.form`
@@ -57,4 +58,9 @@ export const SubmitInput = styled.input`
   font-weight: 700;
   font-size: 14px;
   cursor: pointer;
+`;
+
+export const Total = styled.div`
+  font-weight: 500;
+  font-size: 18px;
 `;

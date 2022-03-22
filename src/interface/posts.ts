@@ -12,6 +12,7 @@ export interface PostReduxState {
   posts: {
     loading: boolean;
     data: Post[] | [];
+    total: number | null;
     error: APIError | null;
   };
   selectedPost: {

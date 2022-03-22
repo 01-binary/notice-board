@@ -9,9 +9,10 @@ import type { Post } from '@src/interface/posts';
 const usePostsFetch = () => {
   const dispatch = useAppDispatch();
 
-  const [postsLoading, rawPosts, postsError] = [
+  const [postsLoading, rawPosts, total, postsError] = [
     useAppSelector(PostsSelector.loading),
     useAppSelector(PostsSelector.data),
+    useAppSelector(PostsSelector.total),
     useAppSelector(PostsSelector.error),
   ];
 
@@ -29,7 +30,7 @@ const usePostsFetch = () => {
       })),
     [rawPosts],
   );
-  return { postsLoading, posts, getPosts };
+  return { postsLoading, posts, getPosts, total };
 };
 
 export default usePostsFetch;

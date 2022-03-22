@@ -5,9 +5,9 @@ import { now } from '@src/utils/day';
 import type { AddPostRequest } from '@src/interface/posts';
 
 const service = {
-  async getPostList(limit: number = 10) {
+  async getPostList(limit: number = 10, page: number = 1) {
     const res: AxiosResponse = await Client.instance.get(
-      `${Client.path.Api}/posts?_limit=${limit}`,
+      `${Client.path.Api}/posts?_limit=${limit}&_page=${page}`,
     );
     return res;
   },
