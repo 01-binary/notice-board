@@ -10,7 +10,7 @@ interface Props {
 const useIntersectionObserver = ({
   root = null,
   onIntersect,
-  threshold = 0.8,
+  threshold = 0.9,
   rootMargin = '0px',
 }: Props) => {
   const [target, setTarget] = useState<HTMLElement | null | undefined>(null);

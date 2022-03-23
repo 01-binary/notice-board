@@ -5,6 +5,7 @@ import Loading from '@src/components/common/Loading';
 import Modal from '@src/components/common/Modal';
 
 import {
+  useAddPostFetch,
   useIntersectionObserver,
   useModalData,
   usePostsData,
@@ -19,19 +20,20 @@ import { postColumn } from '@src/assets/columns';
 const Content: FC = () => {
   const { isModalVisible, showModal, closeModal } = useModalData();
   const { postsLoading, setPage } = usePostsFetch();
+  const { addPostLoading } = useAddPostFetch();
   const { posts, isNeedMoreFetch } = usePostsData();
   const { getSelectedPost, selectedPostLoading, selectedPost } =
     useSelectedPostFetch();
 
   const { setTarget } = useIntersectionObserver({
     onIntersect: ([{ isIntersecting }]) => {
-      if (isIntersecting && isNeedMoreFetch) {
+      if (isIntersecting && !addPostLoading && !postsLoading) {
         setPage();
       }
     },
   });
 
-  if (postsLoading) return <Loading />;
+  // if (postsLoading) return <Loading />;
   return (
     <>
       <Table
@@ -47,10 +49,12 @@ const Content: FC = () => {
           }
         }}
       />
-      {isNeedMoreFetch && (
+      {isNeedMoreFetch ? (
         <div ref={setTarget}>
           <Loading height="100px" />
         </div>
+      ) : (
+        <S.PageEndDiv>페이지 끝!</S.PageEndDiv>
       )}
 
       <Modal visible={isModalVisible} closeModal={closeModal}>

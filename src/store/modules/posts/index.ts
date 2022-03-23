@@ -64,8 +64,10 @@ const postsSlice = createSlice({
         `${postsAsyncAction.addPosts.success}`,
         (state, action: PayloadAction<{ post: Post }>) => {
           state.addPost.loading = false;
-          state.page = 1;
-          state.posts.data = [];
+          if (state.page !== 1) {
+            state.posts.data = [];
+            state.page = 1;
+          }
         },
       )
       .addCase(

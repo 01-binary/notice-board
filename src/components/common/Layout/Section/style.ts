@@ -2,6 +2,6 @@ import styled from "styled-components";
 
 export const Wrapper = styled.section`
   height: 80%;
-  overflow: auto;
+  overflow-y: auto;
   padding: 0 30px;
 `;

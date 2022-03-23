@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -28,4 +28,9 @@ export const CreatedAtWrapper = styled.div`
   color: lightgray;
 `;
 
-export const IntersectionWrapper = styled.div``;
+export const PageEndDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+  font-weight: 500;
+`;
