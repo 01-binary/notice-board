@@ -4,7 +4,7 @@ import Button from '@src/components/common/Button';
 import Modal from '@src/components/common/Modal';
 import Loading from '@src/components/common/Loading';
 
-import { useAddPostFetch, useModalData, usePostsFetch } from '@src/hooks';
+import { useAddPostFetch, useModalData, usePostsData } from '@src/hooks';
 
 import * as S from './style';
 import { ADD_POST, TITLE, CONTENT, AUTHOR, TOTAL } from '@src/assets/string';
@@ -13,7 +13,7 @@ import type { AddPostRequest, AddPostInput } from '@src/interface/posts';
 const Tool: FC = () => {
   const { isModalVisible, showModal, closeModal } = useModalData();
   const { addPost, addPostLoading } = useAddPostFetch();
-  const { total } = usePostsFetch();
+  const { total } = usePostsData();
   const [formState, SetFormState] = useState<AddPostRequest>({
     title: '',
     author: '',

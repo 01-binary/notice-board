@@ -3,3 +3,5 @@ export enum ButtonSize {
   medium = 'medium',
   small = 'small'
 }
+
+export const CONTENT_LIMIT = 10;

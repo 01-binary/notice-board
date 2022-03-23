@@ -1,36 +1,35 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@src/store';
 
-import { PostsSelector } from '@src/store/modules/posts';
+import {
+  PostsSelector,
+  pageSelector,
+  postsAction,
+} from '@src/store/modules/posts';
 import { postsAsyncAction } from '@src/store/modules/posts/saga';
-
-import type { Post } from '@src/interface/posts';
 
 const usePostsFetch = () => {
   const dispatch = useAppDispatch();
 
-  const [postsLoading, rawPosts, total, postsError] = [
+  const [postsLoading, postsError] = [
     useAppSelector(PostsSelector.loading),
-    useAppSelector(PostsSelector.data),
-    useAppSelector(PostsSelector.total),
     useAppSelector(PostsSelector.error),
   ];
+  const page = useAppSelector(pageSelector);
 
   const getPosts = useCallback(() => {
-    dispatch(postsAsyncAction.getPosts.request({}));
-  }, [dispatch]);
+    dispatch(postsAsyncAction.getPosts.request({ page }));
+  }, [dispatch, page]);
 
-  const posts = useMemo(
-    () =>
-      rawPosts.map((post: Post) => ({
-        id: post.id,
-        title: post.title,
-        author: post.author,
-        createdAt: post.createdAt,
-      })),
-    [rawPosts],
-  );
-  return { postsLoading, posts, getPosts, total };
+  const setPage = useCallback(() => {
+    dispatch(postsAction.setPage({ page: page + 1 }));
+  }, [dispatch, page]);
+
+  useEffect(() => {
+    getPosts();
+  }, [page]);
+
+  return { postsLoading, setPage, getPosts };
 };
 
 export default usePostsFetch;

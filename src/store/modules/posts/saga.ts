@@ -17,16 +17,20 @@ export const getPosts = createAsyncAction(
   GET_POSTS,
   GET_POSTS_SUCCESS,
   GET_POSTS_FAILURE,
-)<{}, { posts: Post[], total: number }, APIError>();
+)<{ page: number }, { posts: Post[]; total: number }, APIError>();
 
-function* getPostsSaga() {
+function* getPostsSaga(action: ReturnType<typeof getPosts.request>) {
+  const { page } = action.payload;
   try {
-    const { data, headers }: AxiosResponse<Post[]> = yield call(service.getPostList);
+    const { data, headers }: AxiosResponse<Post[]> = yield call(
+      service.getPostList,
+      page,
+    );
 
     yield put(
       getPosts.success({
         posts: data,
-        total: Number(headers['x-total-count'])
+        total: Number(headers['x-total-count']),
       }),
     );
   } catch ({ response }) {
@@ -85,15 +89,15 @@ function* addPostSaga(action: ReturnType<typeof addPosts.request>) {
     yield put(addPosts.success());
     yield fork(onSuccess);
 
-    const { data: refetchedData, headers }: AxiosResponse<Post[]> = yield call(
-      service.getPostList,
-    );
-    yield put(
-      getPosts.success({
-        posts: refetchedData,
-        total: Number(headers['x-total-count'])
-      }),
-    );
+    // const { data: refetchedData, headers }: AxiosResponse<Post[]> = yield call(
+    //   service.getPostList,
+    // );
+    // yield put(
+    //   getPosts.success({
+    //     posts: refetchedData,
+    //     total: Number(headers['x-total-count']),
+    //   }),
+    // );
   } catch ({ response }) {
     const { data, status } = response as AxiosResponse;
     yield put(getPosts.failure({ data, status }));

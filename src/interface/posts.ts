@@ -24,6 +24,7 @@ export interface PostReduxState {
     loading: boolean;
     error: APIError | null;
   };
+  page: number;
 }
 
 export type AddPostRequest = {

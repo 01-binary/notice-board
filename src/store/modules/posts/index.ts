@@ -5,6 +5,7 @@ import { postsAsyncAction } from './saga';
 import type { RootState } from '@src/store';
 import type { PostReduxState, Post } from '@src/interface/posts';
 import type { APIError } from '@src/interface/error';
+import { action } from 'typesafe-actions';
 
 export const POSTS = 'posts';
 
@@ -24,12 +25,17 @@ const initialState: PostReduxState = {
     loading: false,
     error: null,
   },
+  page: 1,
 };
 
 const postsSlice = createSlice({
   name: POSTS,
   initialState,
-  reducers: {},
+  reducers: {
+    setPage: (state, action: PayloadAction<{ page: number }>) => {
+      state.page = action.payload.page;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(`${postsAsyncAction.getPosts.request}`, (state) => {
@@ -40,7 +46,7 @@ const postsSlice = createSlice({
         (state, action: PayloadAction<{ posts: Post[]; total: number }>) => {
           const { posts, total } = action.payload;
           state.posts.loading = false;
-          state.posts.data = posts;
+          state.posts.data = [...state.posts.data, ...posts];
           state.posts.total = total;
         },
       )
@@ -58,6 +64,8 @@ const postsSlice = createSlice({
         `${postsAsyncAction.addPosts.success}`,
         (state, action: PayloadAction<{ post: Post }>) => {
           state.addPost.loading = false;
+          state.page = 1;
+          state.posts.data = [];
         },
       )
       .addCase(
@@ -124,6 +132,8 @@ export const AddPostSelector = {
   loading: createSelector(addPostSelector, (addPost) => addPost.loading),
   error: createSelector(addPostSelector, (addPost) => addPost.error),
 };
+
+export const pageSelector = createSelector(selfSelector, (state) => state.page);
 
 export const postsAction = postsSlice.actions;
 export const postsReducer = postsSlice.reducer;

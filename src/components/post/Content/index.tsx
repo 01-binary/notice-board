@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC } from 'react';
 
 import Table from '@src/components/common/Table';
 import Loading from '@src/components/common/Loading';
@@ -7,6 +7,7 @@ import Modal from '@src/components/common/Modal';
 import {
   useIntersectionObserver,
   useModalData,
+  usePostsData,
   usePostsFetch,
   useSelectedPostFetch,
 } from '@src/hooks';
@@ -17,22 +18,18 @@ import { postColumn } from '@src/assets/columns';
 
 const Content: FC = () => {
   const { isModalVisible, showModal, closeModal } = useModalData();
-  const { getPosts, postsLoading, posts } = usePostsFetch();
+  const { postsLoading, setPage } = usePostsFetch();
+  const { posts, isNeedMoreFetch } = usePostsData();
   const { getSelectedPost, selectedPostLoading, selectedPost } =
     useSelectedPostFetch();
 
-  const target = useRef<HTMLDivElement>(null);
-  useIntersectionObserver({
-    target,
+  const { setTarget } = useIntersectionObserver({
     onIntersect: ([{ isIntersecting }]) => {
-      if (isIntersecting) {
-        console.log('intersecting');
+      if (isIntersecting && isNeedMoreFetch) {
+        setPage();
       }
     },
   });
-  useEffect(() => {
-    getPosts();
-  }, []);
 
   if (postsLoading) return <Loading />;
   return (
@@ -50,9 +47,12 @@ const Content: FC = () => {
           }
         }}
       />
-      <div ref={target}>
-        <Loading height="100px" />
-      </div>
+      {isNeedMoreFetch && (
+        <div ref={setTarget}>
+          <Loading height="100px" />
+        </div>
+      )}
+
       <Modal visible={isModalVisible} closeModal={closeModal}>
         {selectedPostLoading ? (
           <Loading />
