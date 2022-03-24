@@ -13,6 +13,7 @@ module.exports = {
   output: {
     filename: '[name].js', // [name]은 청크의 이름을 사용한다.
     path: path.join(__dirname, '/dist'),
+    clean: true,
   },
   resolve: {
     modules: ['node_modules'],
