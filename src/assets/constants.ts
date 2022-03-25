@@ -4,4 +4,3 @@ export enum ButtonSize {
   small = 'small'
 }
 
-export const CONTENT_LIMIT = 10;

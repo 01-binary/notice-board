@@ -4,7 +4,7 @@ import { useAppSelector } from '@src/store';
 import { PostsSelector, pageSelector } from '@src/store/modules/posts';
 
 import type { Post } from '@src/interface/posts';
-import { CONTENT_LIMIT } from '@src/assets/constants';
+import { CONTENT_LIMIT } from '@src/assets/string';
 
 const usePostsData = () => {
   const [rawPosts, total] = [
