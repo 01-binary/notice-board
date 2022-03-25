@@ -54,10 +54,13 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
-      hash: true,
     }),
   ],
-  stats: 'errors-only',
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    }
+  },
   devServer: {
     static: {
       directory: path.resolve(__dirname, 'public'),
