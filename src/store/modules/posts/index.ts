@@ -5,7 +5,6 @@ import { postsAsyncAction } from './saga';
 import type { RootState } from '@src/store';
 import type { PostReduxState, Post } from '@src/interface/posts';
 import type { APIError } from '@src/interface/error';
-import { action } from 'typesafe-actions';
 
 export const POSTS = 'posts';
 
@@ -47,6 +46,7 @@ const postsSlice = createSlice({
           const { posts, total } = action.payload;
           state.posts.loading = false;
           state.posts.data = [...state.posts.data, ...posts];
+
           state.posts.total = total;
         },
       )
