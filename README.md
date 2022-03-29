@@ -1,5 +1,5 @@
 
-## 기술 스택
+### 기술 스택
 - React
 - 상태 관리 및 비동기 처리 : Redux, Redux-saga
 - UI: styled-components
