@@ -20,3 +20,6 @@
 - style : 스타일 변경 (포매팅 수정, 들여쓰기 추가, …)
 - build : 빌드 관련 파일 수정
 - chore : 그 외 수정
+
+### 상세설명 링크
+https://likeable-eggnog-5b5.notion.site/PA-1-69e18478967a4729810b6eb019574946
