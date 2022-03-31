@@ -88,16 +88,6 @@ function* addPostSaga(action: ReturnType<typeof addPosts.request>) {
     );
     yield put(addPosts.success());
     yield fork(onSuccess);
-
-    // const { data: refetchedData, headers }: AxiosResponse<Post[]> = yield call(
-    //   service.getPostList,
-    // );
-    // yield put(
-    //   getPosts.success({
-    //     posts: refetchedData,
-    //     total: Number(headers['x-total-count']),
-    //   }),
-    // );
   } catch ({ response }) {
     const { data, status } = response as AxiosResponse;
     yield put(getPosts.failure({ data, status }));
