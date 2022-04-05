@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5", // 컴파일 된 결과물이 어느 버전의 ECMAScript를 따를 것인지
+    "target": "ES5", // 컴파일 된 결과물이 어느 버전의 ECMAScript를 따를 것인지
     "lib": [
       "DOM",
       "DOM.Iterable",
