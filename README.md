@@ -6,14 +6,10 @@
 - Linter / Formatter: ESLint, Prettier
 - Language : TypeScript
 
-<br/>
-
 ### 사용 Tool (VScode Extension)
 - ESLint : JavaScript 코드에서 발견 된 문제을 식별하는 정적 코드 분석 도구
 - Prettier: 코드 포멧터 (작성한 코드를 정해진 코딩 스타일로 변환해주는 도구)
 - EditorConfig: 코드 포멧터
-
-<br/>
 
 ### Commit Message 규칙 (Angular Commit Convention)
 - feat : 새로운 기능 추가
