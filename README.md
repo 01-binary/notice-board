@@ -26,5 +26,7 @@
 ### 프로젝트 실행
 
 yarn
+<br/>
 yarn local-server
+<br/>
 yarn dev
