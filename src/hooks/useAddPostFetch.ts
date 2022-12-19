@@ -1,25 +1,23 @@
-import { useCallback } from 'react';
-import { useAppDispatch, useAppSelector } from '@src/store';
-
-import { AddPostSelector } from '@src/store/modules/posts';
-import { postsAsyncAction } from '@src/store/modules/posts/saga';
 import type { AddPostRequest } from '@src/interface/posts';
+import { useMutation, useQueryClient } from 'react-query';
+import { service } from '@src/apis';
 
 const useAddPostFetch = () => {
-  const dispatch = useAppDispatch();
-  const [addPostLoading, addPostError] = [
-    useAppSelector(AddPostSelector.loading),
-    useAppSelector(AddPostSelector.error),
-  ];
-
-  const addPost = useCallback(
-    (params: { addPostRequest: AddPostRequest; onSuccess: () => void }) => {
-      dispatch(postsAsyncAction.addPosts.request(params));
+  const queryClient = useQueryClient();
+  const addPost = useMutation(
+    (addPostRequest: AddPostRequest) => service.addPost(addPostRequest),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('posts');
+      },
     },
-    [dispatch],
   );
 
-  return { addPostLoading, addPostError, addPost };
+  return {
+    addPostLoading: addPost.isLoading,
+    addPostError: addPost.isError,
+    addPost,
+  };
 };
 
 export default useAddPostFetch;
