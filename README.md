@@ -27,6 +27,6 @@
 
 yarn
 <br/>
-yarn local-server
+yarn local-server (서버 실행)
 <br/>
-yarn dev
+yarn dev (react 실행)
