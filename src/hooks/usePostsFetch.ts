@@ -1,9 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@src/store';
 
-import {
-  PostsSelector,
-} from '@src/store/modules/posts';
+import { PostsSelector } from '@src/store/modules/posts';
 import { postsAsyncAction } from '@src/store/modules/posts/saga';
 
 const usePostsFetch = () => {

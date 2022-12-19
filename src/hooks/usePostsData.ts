@@ -11,7 +11,6 @@ const usePostsData = () => {
     useAppSelector(PostsSelector.total),
   ];
 
-
   const posts = useMemo(
     () =>
       rawPosts.map((post: Post) => ({
