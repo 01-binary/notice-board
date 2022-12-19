@@ -23,5 +23,8 @@
 - build : 빌드 관련 파일 수정
 - chore : 그 외 수정
 
-### 상세설명 링크
-https://likeable-eggnog-5b5.notion.site/PA-1-69e18478967a4729810b6eb019574946
+### 프로젝트 실행
+
+yarn
+yarn local-server
+yarn dev
