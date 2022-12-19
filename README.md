@@ -1,13 +1,3 @@
-
-### 기술 스택
-- React
-- 상태 관리 및 비동기 처리 : Redux, Redux-saga
-- UI: styled-components
-- Linter / Formatter: ESLint, Prettier
-- Language : TypeScript
-
-<br/>
-
 ### 사용 Tool (VScode Extension)
 - ESLint : JavaScript 코드에서 발견 된 문제을 식별하는 정적 코드 분석 도구
 - Prettier: 코드 포멧터 (작성한 코드를 정해진 코딩 스타일로 변환해주는 도구)
