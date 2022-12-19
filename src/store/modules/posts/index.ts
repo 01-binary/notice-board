@@ -15,25 +15,16 @@ const initialState: PostReduxState = {
     total: null,
     error: null,
   },
-  selectedPost: {
-    loading: false,
-    data: null,
-    error: null,
-  },
   addPost: {
     loading: false,
     error: null,
   },
-  page: 1,
 };
 
 const postsSlice = createSlice({
   name: POSTS,
   initialState,
   reducers: {
-    setPage: (state, action: PayloadAction<{ page: number }>) => {
-      state.page = action.payload.page;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -62,12 +53,8 @@ const postsSlice = createSlice({
       })
       .addCase(
         `${postsAsyncAction.addPosts.success}`,
-        (state, action: PayloadAction<{ post: Post }>) => {
+        (state) => {
           state.addPost.loading = false;
-          if (state.page !== 1) {
-            state.posts.data = [];
-            state.page = 1;
-          }
         },
       )
       .addCase(
@@ -75,23 +62,6 @@ const postsSlice = createSlice({
         (state, action: PayloadAction<APIError>) => {
           state.addPost.loading = false;
           state.addPost.error = action.payload;
-        },
-      )
-      .addCase(`${postsAsyncAction.getSelectedPost.request}`, (state) => {
-        state.selectedPost.loading = true;
-      })
-      .addCase(
-        `${postsAsyncAction.getSelectedPost.success}`,
-        (state, action: PayloadAction<{ post: Post }>) => {
-          state.selectedPost.loading = false;
-          state.selectedPost.data = action.payload.post;
-        },
-      )
-      .addCase(
-        `${postsAsyncAction.getSelectedPost.failure}`,
-        (state, action: PayloadAction<APIError>) => {
-          state.selectedPost.loading = false;
-          state.selectedPost.error = action.payload;
         },
       );
   },
@@ -108,34 +78,12 @@ export const PostsSelector = {
   error: createSelector(postsSelector, (posts) => posts.error),
 };
 
-const selectedPostSelector = createSelector(
-  selfSelector,
-  (state) => state.selectedPost,
-);
-
-export const SelectedPostSelector = {
-  loading: createSelector(
-    selectedPostSelector,
-    (selectedPost) => selectedPost.loading,
-  ),
-  data: createSelector(
-    selectedPostSelector,
-    (selectedPost) => selectedPost.data,
-  ),
-  error: createSelector(
-    selectedPostSelector,
-    (selectedPost) => selectedPost.error,
-  ),
-};
-
 const addPostSelector = createSelector(selfSelector, (state) => state.addPost);
 
 export const AddPostSelector = {
   loading: createSelector(addPostSelector, (addPost) => addPost.loading),
   error: createSelector(addPostSelector, (addPost) => addPost.error),
 };
-
-export const pageSelector = createSelector(selfSelector, (state) => state.page);
 
 export const postsAction = postsSlice.actions;
 export const postsReducer = postsSlice.reducer;

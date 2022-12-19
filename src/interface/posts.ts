@@ -15,16 +15,10 @@ export interface PostReduxState {
     total: number | null;
     error: APIError | null;
   };
-  selectedPost: {
-    loading: boolean;
-    data: Post | null;
-    error: APIError | null;
-  };
   addPost: {
     loading: boolean;
     error: APIError | null;
   };
-  page: number;
 }
 
 export type AddPostRequest = {

@@ -3,8 +3,6 @@ import { useAppDispatch, useAppSelector } from '@src/store';
 
 import {
   PostsSelector,
-  pageSelector,
-  postsAction,
 } from '@src/store/modules/posts';
 import { postsAsyncAction } from '@src/store/modules/posts/saga';
 
@@ -15,21 +13,12 @@ const usePostsFetch = () => {
     useAppSelector(PostsSelector.loading),
     useAppSelector(PostsSelector.error),
   ];
-  const page = useAppSelector(pageSelector);
 
   const getPosts = useCallback(() => {
-    dispatch(postsAsyncAction.getPosts.request({ page }));
-  }, [dispatch, page]);
+    dispatch(postsAsyncAction.getPosts.request({}));
+  }, [dispatch]);
 
-  const setPage = useCallback(() => {
-    dispatch(postsAction.setPage({ page: page + 1 }));
-  }, [dispatch, page]);
-
-  useEffect(() => {
-    getPosts();
-  }, [page]);
-
-  return { postsLoading, setPage, getPosts };
+  return { postsLoading, getPosts };
 };
 
 export default usePostsFetch;

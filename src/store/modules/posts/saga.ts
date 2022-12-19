@@ -17,55 +17,21 @@ export const getPosts = createAsyncAction(
   GET_POSTS,
   GET_POSTS_SUCCESS,
   GET_POSTS_FAILURE,
-)<{ page: number }, { posts: Post[]; total: number }, APIError>();
+)<{}, { posts: Post[]; total: number }, APIError>();
 
-function* getPostsSaga(action: ReturnType<typeof getPosts.request>) {
-  const { page } = action.payload;
+function* getPostsSaga() {
   try {
-    const { data, headers }: AxiosResponse<Post[]> = yield call(
-      service.getPostList,
-      page,
-    );
+    const { data }: AxiosResponse<Post[]> = yield call(service.getPostList);
 
     yield put(
       getPosts.success({
         posts: data,
-        total: Number(headers['x-total-count']),
+        total: data?.length || 0,
       }),
     );
   } catch ({ response }) {
     const { data, status } = response as AxiosResponse;
     yield put(getPosts.failure({ data, status }));
-  }
-}
-
-export const GET_SELECTED_POST = `${POSTS}/GET_SELECTED_POST`;
-export const GET_SELECTED_POST_SUCCESS = `${POSTS}/GET_SELECTED_SUCCESS`;
-export const GET_SELECTED_POST_FAILURE = `${POSTS}/GET_SELECTED_FAILURE`;
-
-export const getSelectedPost = createAsyncAction(
-  GET_SELECTED_POST,
-  GET_SELECTED_POST_SUCCESS,
-  GET_SELECTED_POST_FAILURE,
-)<{ id: number }, { post: Post }, APIError>();
-
-function* getSelectedPostSaga(
-  action: ReturnType<typeof getSelectedPost.request>,
-) {
-  const { id } = action.payload;
-  try {
-    const { data }: AxiosResponse<Post> = yield call(
-      service.getPostDetailInformation,
-      id,
-    );
-    yield put(
-      getSelectedPost.success({
-        post: data,
-      }),
-    );
-  } catch ({ response }) {
-    const { data, status } = response as AxiosResponse;
-    yield put(getSelectedPost.failure({ data, status }));
   }
 }
 
@@ -82,10 +48,7 @@ export const addPosts = createAsyncAction(
 function* addPostSaga(action: ReturnType<typeof addPosts.request>) {
   const { addPostRequest, onSuccess } = action.payload;
   try {
-    const { data }: AxiosResponse<Post> = yield call(
-      service.addPost,
-      addPostRequest,
-    );
+    yield call(service.addPost, addPostRequest);
     yield put(addPosts.success());
     yield fork(onSuccess);
   } catch ({ response }) {
@@ -96,12 +59,10 @@ function* addPostSaga(action: ReturnType<typeof addPosts.request>) {
 
 export const postsAsyncAction = {
   getPosts,
-  getSelectedPost,
   addPosts,
 };
 
 export default function* postsSaga() {
   yield takeLatest(GET_POSTS, getPostsSaga);
-  yield takeLatest(GET_SELECTED_POST, getSelectedPostSaga);
   yield takeLatest(ADD_POST, addPostSaga);
 }
