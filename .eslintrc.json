@@ -1,0 +1,18 @@
+{
+  "root": true,
+  "env": {
+    "jest": true
+  },
+  "extends": ["plugin:prettier/recommended"],
+  "rules": {
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [".jsx", ".tsx"]
+      }
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "prettier/prettier": "warn"
+  }
+}

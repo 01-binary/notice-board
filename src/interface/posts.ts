@@ -25,6 +25,6 @@ export type AddPostRequest = {
   title: string;
   author: string;
   content: string;
-}
+};
 
-export type AddPostInput = keyof AddPostRequest
+export type AddPostInput = keyof AddPostRequest;

@@ -7,8 +7,14 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LayoutPage />}>
-          <Route index element={<PostPage />} />
+        <Route
+          path="/"
+          element={<LayoutPage />}
+        >
+          <Route
+            index
+            element={<PostPage />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

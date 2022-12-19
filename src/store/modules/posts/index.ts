@@ -24,8 +24,7 @@ const initialState: PostReduxState = {
 const postsSlice = createSlice({
   name: POSTS,
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(`${postsAsyncAction.getPosts.request}`, (state) => {
@@ -41,29 +40,20 @@ const postsSlice = createSlice({
           state.posts.total = total;
         },
       )
-      .addCase(
-        `${postsAsyncAction.getPosts.failure}`,
-        (state, action: PayloadAction<APIError>) => {
-          state.posts.loading = false;
-          state.posts.error = action.payload;
-        },
-      )
+      .addCase(`${postsAsyncAction.getPosts.failure}`, (state, action: PayloadAction<APIError>) => {
+        state.posts.loading = false;
+        state.posts.error = action.payload;
+      })
       .addCase(`${postsAsyncAction.addPosts.request}`, (state) => {
         state.addPost.loading = true;
       })
-      .addCase(
-        `${postsAsyncAction.addPosts.success}`,
-        (state) => {
-          state.addPost.loading = false;
-        },
-      )
-      .addCase(
-        `${postsAsyncAction.addPosts.failure}`,
-        (state, action: PayloadAction<APIError>) => {
-          state.addPost.loading = false;
-          state.addPost.error = action.payload;
-        },
-      );
+      .addCase(`${postsAsyncAction.addPosts.success}`, (state) => {
+        state.addPost.loading = false;
+      })
+      .addCase(`${postsAsyncAction.addPosts.failure}`, (state, action: PayloadAction<APIError>) => {
+        state.addPost.loading = false;
+        state.addPost.error = action.payload;
+      });
   },
 });
 
