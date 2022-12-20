@@ -2,9 +2,7 @@ import React, { FC } from 'react';
 
 import Table from '@src/components/common/Table';
 
-import {
-  usePostsData,
-} from '@src/hooks';
+import { usePostsData } from '@src/hooks';
 
 import { postColumn } from '@src/assets/columns';
 
